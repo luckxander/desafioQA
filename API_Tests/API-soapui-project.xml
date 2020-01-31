@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="5a1b23d4-0bee-4af6-bb41-0d7acd08ff2f" activeEnvironment="Default" name="API - Luckxander" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="319228e4-2b40-4b8c-9d6f-970887554a63" name="TestSuite - GET"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="8fe9c760-379d-4c86-9c2c-349fd6a0ff92" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="Name-Username-Email" id="bf9d32e5-7467-4f8b-ae46-924d7a20c385"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="b941dd82-975a-429d-ac96-d522ffea99cc" name="Name-Username-Email" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://jsonplaceholder.typicode.com/users</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" id="e9bc13ce-b84e-40ae-9d93-b532b98d2701" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="c42a2559-da88-4acd-92cc-fb8cede6bda9" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper 
+
+def responseMessage = messageExchange.response.responseContent
+def responseData = new JsonSlurper().parseText(responseMessage)
+
+//size of array
+def id = responseData.id
+def size = id.size() 
+
+//name
+def name = responseData.name
+
+//username
+def username = responseData.username
+
+//email
+def email = responseData.email
+
+log.info "TESTSUITE - GET => TESTE CASE 1"
+for (i=0; i&lt;size; i++) 
+{
+	//name no empty
+	assert (name[i] != null)
+	log.info "name "+name[i]
+
+	//username no empty
+	assert (username[i] != null)
+	log.info "username "+username[i]
+
+	//email no empty
+	assert (email[i] != null)
+	log.info "email "+email[i]	
+}
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="acad9984-abb2-4492-9a55-b37eb0d5469d" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 2" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="Valid-Email" id="60493641-bc6b-445b-ac1a-0730671e795a"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="4f218b29-8fe1-40bc-b516-5bbf79852c78" name="Valid-Email" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://jsonplaceholder.typicode.com/users</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" id="36d02092-fad9-4634-ab38-b6e2356c84bc" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="6d52875e-7f8a-4ae0-a633-07b75442edcb" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper 
+
+def responseMessage = messageExchange.response.responseContent
+def responseData = new JsonSlurper().parseText(responseMessage)
+
+//size of array
+def id = responseData.id
+def size = id.size() 
+
+//email
+def email = responseData.email
+
+log.info "TESTSUITE - GET => TESTE CASE 2"
+
+for (i=0; i&lt;size; i++) 
+{
+	//email validation
+	assert (email[i].contains('@'))
+	log.info "email "+email[i]
+}
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="812e9426-a66c-48a8-bef4-50e06a875557" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 3" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="Catchphrase" id="7d7bd067-e013-4e48-9261-cb0da7f037a0"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="4f218b29-8fe1-40bc-b516-5bbf79852c78" name="Catchphrase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://jsonplaceholder.typicode.com/users</con:endpoint><con:request/><con:assertion type="Valid HTTP Status Codes" id="36d02092-fad9-4634-ab38-b6e2356c84bc" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="6d52875e-7f8a-4ae0-a633-07b75442edcb" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper 
+
+def responseMessage = messageExchange.response.responseContent
+def responseData = new JsonSlurper().parseText(responseMessage)
+
+//size of array
+def id = responseData.id
+def size = id.size() 
+
+//catchPhrase
+def catchPhrase = responseData.company.catchPhrase
+
+log.info "TESTSUITE - GET => TESTE CASE 2"
+
+for (i=0; i&lt;size; i++) 
+{
+	//catchPhrase validation
+	characters = catchPhrase[i].length()
+	assert (characters &lt; 50)
+	log.info "Caracteres "+characters
+
+}
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="1f1fb63e-b574-49a3-b173-249eead2f7fb" name="TestSuite - POST"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="17f8b5d9-392d-43c9-ac82-6b873e513faa" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="httprequest" name="Save-OK" id="3aea5f8a-cb1e-4e86-838d-dc1ce9e1584c"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="3d5dc46b-7078-4964-ab0c-7b2fb41ed139" name="Save-OK" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://jsonplaceholder.typicode.com/posts</con:endpoint><con:request>{
+ "userId": 1,
+ "id": 10,
+ "title": "at nam consequatur ea labore ea harum",
+ "body": "cupiditate quo est a modi nesciunt qui minus magnam et distinctio eum\naccusamus ratione error aut"
+}</con:request><con:assertion type="Valid HTTP Status Codes" id="44d758e9-a49e-4cf1-86df-7bd3ff4bde04" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="5b148d4f-705e-49f1-a6ec-9b80f9ba8a01" name="Script Assertion"><con:configuration><scriptText>log.info "TESTSUITE - POST => TESTE CASE 1 => Must return 201 valid code (creation)"</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="45607fe3-0a3e-488b-b6a6-e78c22dc5004" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 2" searchProperties="true"><con:settings/><con:testStep type="httprequest" name="Return-Error" id="cb8f42d7-765d-48d5-9a4e-1bc8710b91d9"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="3d5dc46b-7078-4964-ab0c-7b2fb41ed139" name="Return-Error" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://jsonplaceholder.typicode.com/posts</con:endpoint><con:request>{
+ "userId": 1,
+ "id": 10,
+ "title": "",
+ "body": "cupiditate quo est a modi nesciunt qui minus magnam et distinctio eum\naccusamus ratione error aut"
+}</con:request><con:assertion type="Valid HTTP Status Codes" id="44d758e9-a49e-4cf1-86df-7bd3ff4bde04" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="7d6af71e-605b-48ce-a0c3-ef85881dc23f" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper 
+
+def responseMessage = messageExchange.response.responseContent
+def responseData = new JsonSlurper().parseText(responseMessage)
+
+//title
+def dados = context.expand('${Return-Error#Request}')
+def responseDados = new JsonSlurper().parseText(dados)
+title = responseDados.title
+log.info "TESTSUITE - POST => TESTE CASE 2 => returns error if string length is equal zero"
+assert (title.length() > 0)
+
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

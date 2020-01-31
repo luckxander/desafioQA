@@ -1,0 +1,176 @@
+Feature: Search items on store
+		 As an user of Page http://automationpractice.com/
+		 I want to search for items
+         In order to buy some item
+   
+   Scenario: User search for items
+      Given I am in the search page
+      When I search for "dresses"
+      And I click the search button
+      Then "dresses" should be mentioned in the results
+
+
+Feature: Create New Account
+		 As an new user of Page http://automationpractice.com/
+		 I want to create a new account
+         In order to buy some item
+
+   Scenario: Account creation page
+      Given I am the in authentication page
+      When I type my email address
+      And I click create account
+      Then I am redirected to account creation page
+	  
+   Scenario: Add information
+      Given I am in the create an account page
+      And I select my title
+	  And I type my first name
+	  And I type my last name
+	  And I choose a password
+	  And I set my birth date
+	  And I mark the checkbox to receive newsletter
+	  And I mark the checkbox to receive special offers from partners
+	  And I type the company's name
+	  And I type address line 1
+	  And I type address line 2
+	  And I type the city
+	  And I select the state
+	  And I type the zip code
+	  And I select the country
+	  And I type additional information
+	  And I type home phone
+	  And I type mobile phone
+	  And I assign my alias
+	  When I click register
+      Then my account is created
+
+
+Feature: Sign in online store
+		 As an user of Page http://automationpractice.com/
+		 I want to sign in to my account
+         In order to see my orders
+
+   Scenario: User Sign in to account
+      Given I am in authentication page
+      When I type my email address as "lusenabh@gmail.com"
+      And I type my password as "Cand002b"
+	  And I click Sign in
+      Then I should be logged in to my account
+
+
+Feature: See Woman T-Shirts
+		 As an user of Page http://automationpractice.com/
+		 I want to see some woman t-shirts
+         In order to check if I like it
+	
+   Scenario: See Woman T-Shirts
+      Given I am in the main page
+      When I click woman
+      And I click tops
+	  And I click t-shirts
+      Then I see the items list
+
+
+Feature: Add an item to shopping cart
+		 As an user of Page http://automationpractice.com/
+		 I want to add an item to shopping cart
+         In order to buy it
+
+   Scenario: Add an item to shopping cart
+      Given I am in the selected item page
+      When I type the number of items
+	  And I select the size
+      And I click the color
+	  And I click add to cart
+      Then I see the button to proceed to checkout
+
+
+Feature: View shopping cart
+		 As an user of Page http://automationpractice.com/
+		 I want to see my shopping cart
+         In order to verify the summary
+
+   Scenario: view shopping cart
+      Given I am in the online store
+      When I click shopping cart button
+	  Then I am redirected to shopping-cart summary
+
+
+Feature: Proceed to Checkout
+		 As an user of Page http://automationpractice.com/
+		 I want to proceed to checkout
+         In order to confirm my order
+
+  Background:
+    Given I have logged in
+
+   Scenario: Shopping-cart summary
+      Given I added itens to my cart
+      When I click proceed to checkout button
+	  Then I am redirected to shopping-cart summary
+	  
+   Scenario: Shipping page
+      Given I am in the shopping-cart summary page
+	  And I click proceed to checkout button
+	  And I am redirected to address page
+	  And I click proceed to checkout button
+	  Then I am redirected to shipping page
+	  
+   Scenario: Payment page  
+      Given I am in the shipping page
+	  And I mark agree to terms of service
+	  And I click proceed to checkout button
+      Then I am redirected to payment page
+	  
+   Scenario: Order confirmation
+	  Given I am in the payment page
+	  And I select a payment way
+	  And I click confirm my order
+	  Then I see the order confirmation
+
+
+Feature: View orders
+		 As an user of Page http://automationpractice.com/
+		 I want to view my orders
+         In order to check the status
+
+  Background:
+    Given I have logged in
+
+   Scenario: view user order
+      I am in the online store
+      When I click my orders
+	  Then I see the order history
+
+
+Feature: View my addresses
+		 As an user of Page http://automationpractice.com/
+		 I want to view my addresses
+         In order to check it's updated
+
+  Background:
+    Given I have logged in
+
+   Scenario: view registered addresses
+      I am in the online store
+      When I click my addresses
+	  Then I see all addresses registered
+
+
+Feature: Contact customer service
+		 As an user of Page http://automationpractice.com/
+		 I want to contact the customer service
+         In order to ask the reason of delivery delay
+		 
+  Background:
+    Given I have logged in
+	
+   Scenario: send an email to customer service
+      I am in the online store
+      When I click contact us
+	  And I select the subject heading
+	  And I select an order reference
+	  And I select the product
+	  And I select a file to attached
+	  And I type a message
+	  Then I see sending status
